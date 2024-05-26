@@ -20,7 +20,7 @@ class Ratmaze{
         Ratmaze(){
 
             jb = new JButton("Generate Maze");
-            jb.setBounds(120,200,200,30);
+            jb.setBounds(110,200,200,30);
             // jl = new JLabel("Rows and Columns: ");
             // jl.setBounds(45,140,200,30);
             // jtf = new JTextField();
@@ -56,18 +56,20 @@ class Ratmaze{
                             sol[i][j] = 0; 
                         }
                     }
-    
-                    jf = new JFrame("Rat In da Maze");
-                    jf.setSize(500, 850);
-                    jf.setLayout(new GridLayout(2,1));
+                    
                     jp1 = new JPanel(new GridLayout(n,n));
                     jp2 = new JPanel(null);
                     jb1 = new JButton("Rat in da maze");
                     jb1.setBounds(110,165,200,30);
-                    jp2.add(jb1);
+                    jps = new JPanel[n][n];
+
+                    jf = new JFrame("Rat In da Maze");
+                    jf.setSize(500, 850);
+                    jf.setLayout(new GridLayout(2,1));
                     jf.add(jp1);
                     jf.add(jp2);
-                    jps = new JPanel[n][n];
+                    jp2.add(jb1);
+
                     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     jf.setVisible(true);
 
@@ -75,7 +77,6 @@ class Ratmaze{
                     jb1.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
                             if (movement(maze, sol, 0, 0)){
-                                System.out.println("Called.");
                                 for (int i = 0; i < n; i++) {
                                     for (int j = 0; j < n; j++) {
                                         if (sol[i][j] == 1) {
