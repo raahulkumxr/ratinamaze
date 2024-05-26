@@ -37,16 +37,16 @@ class Ratmaze{
             jb.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     n = Integer.parseInt(jtf.getText());
-                    maze = new int[n][n];
+                    // maze = new int[n][n];
                     sol = new int[n][n];
-                    generatemaze(maze);
+                    // generatemaze(maze);
 
                     /* custom maze */
-                    // int [][] maze = {{1, 1, 0, 1, 0},
-                    //                 {0, 1, 1, 1, 0}, 
-                    //                 {1, 1, 0, 0, 1},
-                    //                 {1, 0, 1, 1, 1},
-                    //                 {1, 1, 1, 0, 1}};
+                    int [][] maze = {{1, 1, 0, 1, 0},
+                                    {0, 1, 1, 1, 0}, 
+                                    {1, 1, 0, 0, 1},
+                                    {1, 0, 1, 1, 1},
+                                    {1, 1, 1, 0, 1}};
                                     
                     for (int i = 0; i < n; i++){
                         for (int j = 0; j < n; j++){
@@ -72,6 +72,7 @@ class Ratmaze{
                     jb1.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
                             if (movement(maze, sol, 0, 0)){
+                                System.out.println("Called.");
                                 for (int i = 0; i < n; i++) {
                                     for (int j = 0; j < n; j++) {
                                         if (sol[i][j] == 1) {
@@ -87,47 +88,47 @@ class Ratmaze{
             });
         }
         /* to create a randomized maze */
-        void generatemaze(int[][] maze){
-            random = new Random();
-            int row = 0;
-            int column = 0; 
-            for (int i = 0; i < n; i++){
-                for (int j = 0; j < n; j++) maze[i][j] = 0;
-            }
-            maze[row][column] = 1;
-            generatepassage(maze, row, column);
-        }
+        // void generatemaze(int[][] maze){
+        //     random = new Random();
+        //     int row = 0;
+        //     int column = 0; 
+        //     for (int i = 0; i < n; i++){
+        //         for (int j = 0; j < n; j++) maze[i][j] = 0;
+        //     }
+        //     maze[row][column] = 1;
+        //     generatepassage(maze, row, column);
+        // }
         
-        void generatepassage(int[][] maze, int row, int column){
-            Random random = new Random();
-            int currentRow = 0;
-            int currentCol = 0;
-            int endRow = n-1;
-            int endCol = n-1;
+        // void generatepassage(int[][] maze, int row, int column){
+        //     Random random = new Random();
+        //     int currentRow = 0;
+        //     int currentCol = 0;
+        //     int endRow = n-1;
+        //     int endCol = n-1;
 
-            while (currentRow != endRow || currentCol != endCol) {
-                maze[currentRow][currentCol] = 1; 
-                int direction = random.nextInt(4); // 0: up, 1: right, 2: down, 3: left
-                switch (direction) {
-                    case 0: // Up
-                        if (currentRow > 0) currentRow--;
-                        break;
-                    case 1: // Right
-                        if (currentCol < n - 1) currentCol++;
-                        break;
-                    case 2: // Down
-                        if (currentRow < n - 1) currentRow++;
-                        break;
-                    case 3: // Left
-                        if (currentCol > 0) currentCol--;
-                        break;
-                }
-            }
-            maze[endRow][endCol] = 1;
-        }
+        //     while (currentRow != endRow || currentCol != endCol) {
+        //         maze[currentRow][currentCol] = 1; 
+        //         int direction = random.nextInt(4); // 0: up, 1: right, 2: down, 3: left
+        //         switch (direction) {
+        //             case 0: // Up
+        //                 if (currentRow > 0) currentRow--;
+        //                 break;
+        //             case 1: // Right
+        //                 if (currentCol < n - 1) currentCol++;
+        //                 break;
+        //             case 2: // Down
+        //                 if (currentRow < n - 1) currentRow++;
+        //                 break;
+        //             case 3: // Left
+        //                 if (currentCol > 0) currentCol--;
+        //                 break;
+        //         }
+        //     }
+        //     maze[endRow][endCol] = 1;
+        // }
 
         boolean canigo(int[][] maze, int x, int y){
-            if ((x < n && x >= 0) && (y < n && y >= 0) && (maze[x][y] == 1)) return true;
+            if ((x < n && x >= 0) && (y < n && y >= 0) && (maze[x][y] == 1) && (sol[x][y] == 0)) return true;
             else return false;
         }
         boolean movement(int[][] maze, int[][] sol, int x, int y){
@@ -139,6 +140,8 @@ class Ratmaze{
                 sol[x][y] = 1;
                 if (movement(maze, sol, x+1, y) == true) return true;
                 if (movement(maze, sol, x, y+1) == true) return true;
+                if (movement(maze, sol, x-1, y) == true) return true;
+                if (movement(maze, sol, x, y-1) == true) return true;
                 sol[x][y] = 0; 
                 return false;
             }
