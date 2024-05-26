@@ -19,25 +19,28 @@ class Ratmaze{
 
         Ratmaze(){
 
+            jb = new JButton("Generate Maze");
+            jb.setBounds(120,200,200,30);
+            // jl = new JLabel("Rows and Columns: ");
+            // jl.setBounds(45,140,200,30);
+            // jtf = new JTextField();
+            // jtf.setBounds(190,140,200,30);
+
             jf1 = new JFrame("Rat");
             jf1.setSize(500,500);
             jf1.setLayout(null);
-            jb = new JButton("Generate Maze");
             jf1.add(jb);
-            jb.setBounds(120,200,200,30);
-            jl = new JLabel("Rows and Columns: ");
-            jtf = new JTextField();
-            jf1.add(jl);
-            jl.setBounds(45,140,200,30);
-            jf1.add(jtf);
-            jtf.setBounds(190,140,200,30);
+            // jf1.add(jl);
+            // jf1.add(jtf);
+            
             jf1.setVisible(true);
             jf1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             jb.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    n = Integer.parseInt(jtf.getText());
+                    // n = Integer.parseInt(jtf.getText());
                     // maze = new int[n][n];
+                    n = 5;
                     sol = new int[n][n];
                     // generatemaze(maze);
 
