@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class ratinamaze extends mazegeneration{
 
@@ -15,7 +14,6 @@ public class ratinamaze extends mazegeneration{
         JPanel jp1,jp2;
         JLabel jl;
         JButton jb,jb1;
-        Random random;
 
         void init(){
             
@@ -37,7 +35,7 @@ public class ratinamaze extends mazegeneration{
             
             jf1.setVisible(true);
             jf1.setLocationRelativeTo(null);
-            jf1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
             
             jb.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
@@ -56,6 +54,8 @@ public class ratinamaze extends mazegeneration{
                         for (int j = 0; j < n; j++){
                             sol[i][j] = 0; 
                             maze[i][j] = 0;
+                            jps[i][j] = new JPanel();
+                            jp1.add(jps[i][j]);
                         }
                     }
                     
@@ -68,9 +68,10 @@ public class ratinamaze extends mazegeneration{
 
                     generatemaze(maze, n);
 
-                    jf.setVisible(true);
                     jf.setLocationRelativeTo(null);
-
+                    jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    jf.setVisible(true);
+                    
                     printmaze(sol, maze);
                     jb1.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
@@ -86,11 +87,10 @@ public class ratinamaze extends mazegeneration{
                             else JOptionPane.showMessageDialog(jf, "No paths available for the generated maze!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     });
-                    
                 }
             });
+            jf1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             
-            jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             
         }
         
@@ -110,10 +110,10 @@ public class ratinamaze extends mazegeneration{
             } 
             if (canigo(maze, x, y) == true){
                 sol[x][y] = 1;
-                if (movement(maze, sol, x+1, y) == true) return true;
                 if (movement(maze, sol, x, y+1) == true) return true;
-                if (movement(maze, sol, x-1, y) == true) return true;
+                if (movement(maze, sol, x+1, y) == true) return true;
                 if (movement(maze, sol, x, y-1) == true) return true;
+                if (movement(maze, sol, x-1, y) == true) return true;
                 sol[x][y] = 0; 
                 return false;
             }
@@ -124,8 +124,6 @@ public class ratinamaze extends mazegeneration{
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     System.out.print(" " + maze[i][j] + " ");
-                    jps[i][j] = new JPanel();
-                    jp1.add(jps[i][j]);
                     jps[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                     if (maze[i][j] == 1) jps[i][j].setBackground(new Color(255,255,255));
                     else jps[i][j].setBackground(new Color(128,128,128));

@@ -1,9 +1,8 @@
 import java.util.Random;
-
 public class mazegeneration {
         Random random;
         public void generatemaze(int[][] maze, int n) {
-            Random random = new Random();
+            random = new Random();
             int hurdleCount = (n * n) / 3; 
     
             for (int i = 0; i < n; i++) {
